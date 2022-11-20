@@ -30,14 +30,37 @@ include_directories(
   ${OpenCV_INCLUDE_DIRS}
 )
 
-add_executable(image_converter_node src/image_converter_node.cpp)
-ament_target_dependencies(image_converter_node 
+add_executable(cam2image_node src/cam2image.cpp)
+ament_target_dependencies(cam2image_node 
   rclcpp
   std_msgs 
   sensor_msgs
 )
-target_link_libraries(image_converter_node
+target_link_libraries(cam2image_node
   ${OpenCV_LIBS}
+)
+
+add_executable(showimage_node src/showimage.cpp)
+ament_target_dependencies(showimage_node 
+  rclcpp
+  sensor_msgs
+)
+target_link_libraries(showimage_node
+  ${OpenCV_LIBS}
+)
+
+install(
+  TARGETS
+    cam2image_node
+    showimage_node
+  DESTINATION 
+    lib/${PROJECT_NAME}
+)
+
+# Install launch files.
+install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}
 )
 
 if(BUILD_TESTING)

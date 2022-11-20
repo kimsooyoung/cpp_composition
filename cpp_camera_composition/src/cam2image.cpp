@@ -5,9 +5,7 @@
 // https://stackoverflow.com/questions/65935364/looking-for-cv-bridge-example-in-c-for-ros2
 
 
-#include "cv_bridge/cv_bridge.h"
 #include "rclcpp/rclcpp.hpp"
-#include "rmw/qos_profiles.h"
 #include "sensor_msgs/msg/image.hpp"
 #include "std_msgs/msg/header.hpp"
 
@@ -15,9 +13,9 @@
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/opencv.hpp"
 
+#include "cpp_camera_composition/visibility_control.h"
+
 #include <cstdio>
-#include <memory>
-#include <string>
 
 using namespace std;
 using namespace cv;
@@ -86,7 +84,7 @@ public:
         std::chrono::milliseconds(static_cast<int>(1000.0 / freq_)),
         std::bind(&ImagePublisher::timer_callback, this));
 
-    img_pub_ = create_publisher<Image>("image_pub_by_node", qos);
+    img_pub_ = create_publisher<Image>("image", qos);
   }
 
   void parse_parameters() {
@@ -95,7 +93,7 @@ public:
     width_ = this->declare_parameter("width", 640);
     height_ = this->declare_parameter("height", 480);
     device_id_ = static_cast<int>(this->declare_parameter("device_id", 0));
-    show_camera_ = this->declare_parameter("show_camera", true);
+    show_camera_ = this->declare_parameter("show_camera", false);
   }
 
   void timer_callback() {
