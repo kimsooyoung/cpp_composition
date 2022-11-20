@@ -25,7 +25,7 @@ private:
   rmw_qos_profile_t custom_camera_qos_profile_;
 
 public:
-  IMAGE_TOOLS_PUBLIC
+  IMAGE_TOOLS_LOCAL
   ShowImage() : Node("showimage") {
     rmw_qos_reliability_policy_t reliability_policy =
         RMW_QOS_POLICY_RELIABILITY_RELIABLE;

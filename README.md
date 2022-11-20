@@ -43,7 +43,7 @@ ros2 launch cpp_camera_composition eloquent_camshow_composition.launch.py
 ros2 launch cpp_camera_composition eloquent_camshow_node.launch.py 
 ```
 
-### Result
+## Benchmark Result
 
 * composition case
 
@@ -51,5 +51,7 @@ CPU Usage (using `top`)
 ```
 composition : CPU: ~40% / Mem: 0.7%
 
-standalone nodes : CPU: 24.4 / Mem: 0.6
+standalone nodes 
+cam2image_node : CPU: ~20% / Mem: 0.5%
+showimage_node : CPU: ~10% / Mem: 0.5%
 ```

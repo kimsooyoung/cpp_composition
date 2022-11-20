@@ -4,7 +4,6 @@
 // https://surfertas.github.io/ros2/2019/08/17/ros2-qos.html
 // https://stackoverflow.com/questions/65935364/looking-for-cv-bridge-example-in-c-for-ros2
 
-
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/image.hpp"
 #include "std_msgs/msg/header.hpp"
@@ -47,6 +46,7 @@ private:
   rclcpp::Publisher<Image>::SharedPtr img_pub_;
 
 public:
+  IMAGE_TOOLS_LOCAL
   ImagePublisher() : Node("image_publisher_node") {
 
     rmw_qos_reliability_policy_t reliability_policy =
@@ -87,6 +87,7 @@ public:
     img_pub_ = create_publisher<Image>("image", qos);
   }
 
+  IMAGE_TOOLS_LOCAL
   void parse_parameters() {
     depth_ = this->declare_parameter("depth", 10);
     freq_ = this->declare_parameter("freq", 30.0);
@@ -96,6 +97,7 @@ public:
     show_camera_ = this->declare_parameter("show_camera", false);
   }
 
+  IMAGE_TOOLS_LOCAL
   void timer_callback() {
     cv::Mat frame;
 
@@ -132,6 +134,7 @@ public:
     img_pub_->publish(std::move(msg));
   }
 
+  IMAGE_TOOLS_LOCAL
   std::string mat_type2encoding(int mat_type) {
     switch (mat_type) {
     case CV_8UC1:
@@ -147,6 +150,7 @@ public:
     }
   }
 
+  IMAGE_TOOLS_LOCAL
   void convert_frame_to_message(const cv::Mat &frame,
                                 sensor_msgs::msg::Image &msg) {
     // copy cv information into ros message
@@ -160,6 +164,7 @@ public:
     msg.header.frame_id = "camera_frame";
   }
 
+  IMAGE_TOOLS_LOCAL
   ~ImagePublisher() {}
 };
 
