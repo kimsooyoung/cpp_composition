@@ -23,18 +23,29 @@ def generate_launch_description():
         }],
     )
 
-    showimage_node = Node(
+    # showimage_node = Node(
+    #     package='cpp_camera_composition',
+    #     node_executable='showimage_node',
+    #     node_name='showimage_node',
+    #     output='screen',
+    #     parameters=[{
+    #         "show_image": True,
+    #         "depth": 10,
+    #     }],
+    # )
+
+    grayimage_node = Node(
         package='cpp_camera_composition',
-        node_executable='showimage_node',
-        node_name='showimage_node',
+        node_executable='grayimage_node',
+        node_name='grayimage_node',
         output='screen',
         parameters=[{
-            "show_image": True,
-            "depth": 10,
+            "show_camera": True,
         }],
     )
 
     return launch.LaunchDescription([
         cam2image_node,
-        showimage_node,
+        # showimage_node,
+        grayimage_node,
     ])

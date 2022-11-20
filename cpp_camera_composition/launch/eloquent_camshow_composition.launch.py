@@ -28,6 +28,7 @@ def generate_launch_description():
                         "height": 480,
                     }]
                 ),
+                # show raw image
                 # ComposableNode(
                 #     package='image_tools',
                 #     node_plugin='image_tools::ShowImage',
@@ -36,6 +37,7 @@ def generate_launch_description():
                 #         "history": "keep_last",
                 #     }]
                 # ),
+                # show grayscale image
                 ComposableNode(
                     package='cpp_camera_composition',
                     node_plugin='cpp_camera_composition::GrayImage',

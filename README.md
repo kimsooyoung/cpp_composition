@@ -38,7 +38,7 @@ ros2 launch cpp_camera_composition eloquent_img_cvt_composition.launch.py
 # Composition vs Node standalone
 
 ```
-ros2 launch cpp_camera_composition eloquent_camshow_composition.launch.py 
+ros2 launch cpp_camera_composition eloquent_camshow_composition.launch.py
 ```
 
 ```
@@ -55,5 +55,6 @@ composition : CPU: ~40% / Mem: 0.7%
 
 standalone nodes 
 cam2image_node : CPU: ~20% / Mem: 0.5%
-showimage_node : CPU: ~10% / Mem: 0.5%
+showimage_node : CPU: ~15% / Mem: 0.5%
+grayimage_node : CPU: ~15% / Mem: 0.5%
 ```
