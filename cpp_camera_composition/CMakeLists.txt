@@ -30,6 +30,7 @@ include_directories(
   ${OpenCV_INCLUDE_DIRS}
 )
 
+# cam2image
 add_executable(cam2image_node src/cam2image.cpp)
 ament_target_dependencies(cam2image_node 
   rclcpp
@@ -40,6 +41,7 @@ target_link_libraries(cam2image_node
   ${OpenCV_LIBS}
 )
 
+# showimage
 add_executable(showimage_node src/showimage.cpp)
 ament_target_dependencies(showimage_node 
   rclcpp
@@ -48,6 +50,26 @@ ament_target_dependencies(showimage_node
 target_link_libraries(showimage_node
   ${OpenCV_LIBS}
 )
+
+# grayimage_component
+add_library(grayimage_component SHARED src/grayimage_component.cpp)
+target_compile_definitions(grayimage_component PRIVATE "COMPOSITION_BUILDING_DLL")
+ament_target_dependencies(grayimage_component
+  rclcpp
+  rclcpp_components
+  sensor_msgs
+)
+target_link_libraries(grayimage_component
+  ${OpenCV_LIBS}
+)
+rclcpp_components_register_nodes(grayimage_component "cpp_camera_composition::MoveRobot")
+set(node_plugins "${node_plugins}cpp_camera_composition::GrayImage;$<TARGET_FILE:grayimage_component>\n")
+
+install(TARGETS
+  grayimage_component
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin)
 
 install(
   TARGETS

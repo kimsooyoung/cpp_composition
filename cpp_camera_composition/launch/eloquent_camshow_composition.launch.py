@@ -28,12 +28,20 @@ def generate_launch_description():
                         "height": 480,
                     }]
                 ),
+                # ComposableNode(
+                #     package='image_tools',
+                #     node_plugin='image_tools::ShowImage',
+                #     node_name='showimage',
+                #     parameters=[{
+                #         "history": "keep_last",
+                #     }]
+                # ),
                 ComposableNode(
-                    package='image_tools',
-                    node_plugin='image_tools::ShowImage',
-                    node_name='showimage',
+                    package='cpp_camera_composition',
+                    node_plugin='cpp_camera_composition::GrayImage',
+                    node_name='grayimage',
                     parameters=[{
-                        "history": "keep_last",
+                        "show_camera": True,
                     }]
                 ),
             ],
