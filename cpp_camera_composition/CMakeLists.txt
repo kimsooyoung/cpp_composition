@@ -24,6 +24,7 @@ find_package(sensor_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(image_transport REQUIRED)
 find_package(OpenCV REQUIRED)
+find_package(example_interfaces REQUIRED)
 
 include_directories(
   include
@@ -61,6 +62,26 @@ target_link_libraries(grayimage_node
   ${OpenCV_LIBS}
 )
 
+add_executable(test_node src/test.cpp)
+ament_target_dependencies(test_node 
+  rclcpp
+)
+target_link_libraries(test_node
+  ${OpenCV_LIBS}
+)
+
+add_executable(server src/add_two_ints_server.cpp)
+ament_target_dependencies(server
+  rclcpp 
+  example_interfaces
+)
+
+add_executable(client src/add_two_ints_client.cpp)
+ament_target_dependencies(client
+  rclcpp
+  example_interfaces
+)
+
 # grayimage_component
 add_library(grayimage_component SHARED src/grayimage_component.cpp)
 target_compile_definitions(grayimage_component PRIVATE "COMPOSITION_BUILDING_DLL")
@@ -83,6 +104,9 @@ install(TARGETS
 
 install(
   TARGETS
+    client 
+    server
+    test_node
     cam2image_node
     showimage_node
     grayimage_node
